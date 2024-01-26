@@ -1,0 +1,50 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = "Update Product";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+<form asp-action="Edit">
+    <div class="container">
+        <input type="hidden" asp-for="Id" />
+
+        <!-- Display the image here -->
+        
+
+        <div class="mb-2">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+
+        </div>
+        <div class="mb-2">
+            <label asp-for="Price" class="control-label"></label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+
+        </div>
+        <div class="mb-2">
+            <label asp-for="Quantity" class="control-label"></label>
+            <input asp-for="Quantity" class="form-control" />
+            <span asp-validation-for="Quantity" class="text-danger"></span>
+
+        </div>
+        <div class="mb-2">
+            <label asp-for="Description" class="control-label"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+
+        </div>
+        <div class="mb-2">
+            <label class="control-label">Category</label>
+            <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories">
+                <option>--Select Category--</option>
+            </select>
+        </div>
+        <div>
+            <input type="submit" value="Update" class="btn btn-success btn-sm" />
+        </div>
+    </div>
+</form>

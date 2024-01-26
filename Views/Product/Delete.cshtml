@@ -1,0 +1,42 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = "Delete Product";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+<form asp-action="Delete">
+    <div class="container">
+        <input type="hidden" asp-for="Id" />
+
+        <!-- Display the image here -->
+
+
+        <div class="mb-2">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" readonly />
+        </div>
+        <div class="mb-2">
+            <label asp-for="Price" class="control-label"></label>
+            <input asp-for="Price" class="form-control" readonly />
+        </div>
+        <div class="mb-2">
+            <label asp-for="Quantity" class="control-label"></label>
+            <input asp-for="Quantity" class="form-control" readonly />
+        </div>
+        <div class="mb-2">
+            <label asp-for="Description" class="control-label"></label>
+            <input asp-for="Description" class="form-control" readonly />
+        </div>
+        <div class="mb-2">
+            <label class="control-label">Category</label>
+            <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories" disabled>
+                <option>--Select Category--</option>
+            </select>
+        </div>
+        <div>
+            <input type="submit" value="Delete" class="btn btn-danger btn-sm" />
+        </div>
+    </div>
+</form>
