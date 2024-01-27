@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Http; // Add this namespace
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WebApplication_Artisan_.Models;
 
-namespace WebApplication_Artisan_.Models
+namespace WebApplication_Artisan_
 {
-    public class Product
+    public class productviewmodel
     {
-        [Key]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Please enter the product name.")]
@@ -20,13 +19,11 @@ namespace WebApplication_Artisan_.Models
 
         public string Description { get; set; }
 
-        public string ImageUrl { get; set; }
+        public IFormFile photo { get; set; }
 
 
         [ForeignKey("Categories")]
         public int CategoryId { get; set; }
         public virtual Category Categories { get; set; }
-
-        
     }
 }

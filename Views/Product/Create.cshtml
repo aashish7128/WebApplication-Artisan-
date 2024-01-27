@@ -1,14 +1,13 @@
-﻿@model Product
+﻿@model WebApplication_Artisan_.productviewmodel
 
 @{
     ViewData["Title"] = "Create Product";
 }
 
-<h3>
-    @ViewData["Title"]
-</h3>
+<h3>@ViewData["Title"]</h3>
 <hr />
-<form asp-action="Create" enctype="multipart/form-data">
+<p>Added Successfully!</p>
+<form asp-action="Create" method="post" enctype="multipart/form-data">
     <div class="container">
         <div class="mb-2">
             <label asp-for="Name" class="control-label"></label>
@@ -36,7 +35,13 @@
                 <option>--Select Category--</option>
             </select>
         </div>
+        <div class="mb-2">
+            <label asp-for="photo" class="control-label">Upload Image</label>
+            <input asp-for="photo" class="form-control" />
+            <span asp-validation-for="photo" class="text-danger"></span>
 
+
+        </div>
         <div>
             <input type="submit" value="Create" class="btn btn-primary btn-sm" />
         </div>

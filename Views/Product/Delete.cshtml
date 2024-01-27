@@ -11,7 +11,9 @@
         <input type="hidden" asp-for="Id" />
 
         <!-- Display the image here -->
-
+        <div>
+            <img src="~/Images/@Model.ImageUrl" alt="@Model.Name" style="max-width: 200px;" />
+        </div>
 
         <div class="mb-2">
             <label asp-for="Name" class="control-label"></label>

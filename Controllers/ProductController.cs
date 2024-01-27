@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
+using System;
 using WebApplication_Artisan_.DataAccessLayer;
 using WebApplication_Artisan_.Models;
 
@@ -9,10 +11,14 @@ namespace WebApplication_Artisan_.Controllers
     public class ProductController : Controller
     {
         private readonly ArtisanDbContext _context;
+        private readonly IWebHostEnvironment _environment;
 
-        public ProductController(ArtisanDbContext context)
+
+        public ProductController(ArtisanDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
+
         }
 
         public IActionResult Index()
@@ -20,13 +26,52 @@ namespace WebApplication_Artisan_.Controllers
             var products = _context.Products.Include(p => p.Categories);
             return View(products);
         }
-
+        // GET: Product/Create
         [HttpGet]
         public IActionResult Create()
         {
             LoadCategories();
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Create(productviewmodel model, IFormFile imageFile)
+        {
+            string filename = "";
+            if (model.photo != null)
+            {
+                string imagePath = Path.Combine(_environment.WebRootPath, "Images");
+                filename = Guid.NewGuid().ToString() + "_" + model.photo.FileName;
+                string filepath = Path.Combine(imagePath, filename);
+                using (var stream = new FileStream(filepath, FileMode.Create))
+                {
+                    model.photo.CopyTo(stream);
+                }
+            }
+
+            Product product = new Product
+            {
+                Name = model.Name,
+                Price = model.Price,
+                Quantity = model.Quantity,
+                Description = model.Description,
+                ImageUrl = filename,
+                CategoryId = model.CategoryId // Assuming CategoryId is a property in your productviewmodel
+            };
+
+            _context.Products.Add(product);
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index)); // Redirect to the product listing page after creation
+        }
+
+
+
+
+        
+
+
+
         [NonAction]
         private void LoadCategories()
         {
@@ -34,17 +79,7 @@ namespace WebApplication_Artisan_.Controllers
             ViewBag.Categories = new SelectList(categories, "Id", "Name");
         }
 
-        [HttpPost]
-        public IActionResult Create(Product model)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Products.Add(model);
-                _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(model);
-        }
+
 
         [HttpGet]
         public IActionResult Edit(int? id)
@@ -61,6 +96,7 @@ namespace WebApplication_Artisan_.Controllers
             }
             return View(product);
         }
+       
 
         [HttpPost]
         public IActionResult Edit(Product model)

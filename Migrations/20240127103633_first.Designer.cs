@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication_Artisan_.DataAccessLayer;
 
@@ -10,9 +11,11 @@ using WebApplication_Artisan_.DataAccessLayer;
 namespace WebApplication_Artisan_.Migrations
 {
     [DbContext(typeof(ArtisanDbContext))]
-    partial class ArtisanDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240127103633_first")]
+    partial class first
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

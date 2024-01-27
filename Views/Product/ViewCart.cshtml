@@ -2,32 +2,34 @@
 
 <h2>Your Shopping Cart</h2>
 
-<table>
-    <thead>
-        <tr>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Total</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Items)
-        {
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <td>@item.ProductName</td>
-                <td>@item.Price</td>
-                <td>@item.Quantity</td>
-                <td>@(item.Price * item.Quantity)</td>
-                <td>
-                    <form asp-action="RemoveFromCart" asp-route-id="@item.ProductId" method="post">
-                        <button type="submit">Remove</button>
-                    </form>
-                </td>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Action</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>$@item.Price</td>
+                    <td>@item.Quantity</td>
+                    <td>$@(item.Price * item.Quantity)</td>
+                    <td>
+                        <form asp-action="RemoveFromCart" asp-route-id="@item.ProductId" method="post">
+                            <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
-<a asp-action="Checkout">Checkout</a>
+<!-- No Checkout Button -->

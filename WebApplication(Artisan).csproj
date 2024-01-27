@@ -15,6 +15,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20240125194028_initial.cs" />
+    <Compile Remove="Migrations\20240125194028_initial.Designer.cs" />
+    <Compile Remove="Migrations\20240126085459_second_migration.cs" />
+    <Compile Remove="Migrations\20240126085459_second_migration.Designer.cs" />
+    <Compile Remove="Migrations\20240126102320_third_migration.cs" />
+    <Compile Remove="Migrations\20240126102320_third_migration.Designer.cs" />
+    <Compile Remove="Migrations\20240126112750_fourth-migration.cs" />
+    <Compile Remove="Migrations\20240126112750_fourth-migration.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.1" />
